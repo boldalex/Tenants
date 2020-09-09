@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title>Регистрация нового пользователя</mat-card-title>
+  <form (submit)="onSignUp(signupForm)" #signupForm="ngForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput ngModel #emailInput="ngModel" type="email" name="email" required email>
+      <mat-error *ngIf="emailInput.invalid">Пожалуйста введите действительный адрес {{usernameInput.value === 'kek'}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Имя пользователя</mat-label>
+      <input matInput ngModel #usernameInput="ngModel" type="text" name="username" required invalidInput>
+      <mat-error *ngIf="usernameInput.invalid">Пожалуйста введите подходящее имя пользователя</mat-error>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Пароль</mat-label>
+      <input matInput ngModel #passwordInput1="ngModel" name="password1" [type]="hide ? 'password' : 'text'"
+      pattern="(?=.*\d)(?=.*[a-z]).{6,}" required invalidInput>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="usernameInput.invalid">Пароль должен содержать не менее 6 символов,
+        включая как минимум одну цифру и букву </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Подтвердите пароль</mat-label>
+      <input matInput ngModel #passwordInput2="ngModel" name="password2" [type]="hide ? 'password' : 'text'"
+      pattern="{{passwordInput1.value}}" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="usernameInput.invalid">Пароль должен совпадать</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="warn">Зарегистрироваться</button>
+  </form>
+</mat-card>

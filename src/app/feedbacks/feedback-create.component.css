@@ -1,0 +1,15 @@
+button{
+  display: block;
+}
+
+app-star-rating{
+  display:block;
+}
+
+mat-form-field{
+  width: 50%;
+}
+
+mat-card{
+  margin-bottom: 20px;
+}

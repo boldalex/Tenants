@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-title>Создание нового отзыва</mat-card-title>
+  <form (submit)="createFeedback(createFeedbackForm)" #createFeedbackForm="ngForm">
+
+    <mat-card>
+      <h2>Рейтинг окружения</h2>
+
+      <app-star-rating matInput [ngModel]="neighborhoodRating" name="neighborhoodRating" [readonly]="false"></app-star-rating>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #neighborhoodComment="ngModel" name="neighborhoodComment"></textarea>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+      <h2>Рейтинг квартиры</h2>
+
+      <app-star-rating matInput [ngModel]="flatRating" name="flatRating" [readonly]="false"></app-star-rating>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #flatComment="ngModel" name="flatComment"></textarea>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+      <h2>Рейтинг расположения</h2>
+
+      <app-star-rating matInput [ngModel]="locationRating" name="locationRating" [readonly]="false"></app-star-rating>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #locationComment="ngModel" name="locationComment"></textarea>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+      <h2>Рейтинг владельца</h2>
+
+      <app-star-rating matInput [ngModel]="ownerRating" name="ownerRating" [readonly]="false"></app-star-rating>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #ownerComment="ngModel" name="ownerComment"></textarea>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+      <h2>Рейтинг инфраструктуры</h2>
+
+      <app-star-rating matInput [ngModel]="infrastructureRating" name="infrastructureRating" [readonly]="false"></app-star-rating>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #infrastructureComment="ngModel" name="infrastructureComment"></textarea>
+      </mat-form-field>
+    </mat-card>
+
+    <mat-card>
+      <h2>Общий отзыв</h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput ngModel rows="6" #infrastructureComment="ngModel" name="infrastructureComment" required></textarea>
+      </mat-form-field>
+    </mat-card>
+
+
+
+
+    <button mat-raised-button color="warn">Оставить отзыв</button>
+  </form>
+</mat-card>
+

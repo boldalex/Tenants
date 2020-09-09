@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>Вход</mat-card-title>
+  <form (submit)="onLogin(signupForm)" #signupForm="ngForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput ngModel #emailInput="ngModel" type="email" name="email" required email>
+      <mat-error *ngIf="emailInput.invalid">Пожалуйста введите email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Пароль</mat-label>
+      <input matInput ngModel #passwordInput="ngModel" name="password" [type]="hide ? 'password' : 'text'"
+      required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordInput.invalid">Пожалуйста введите пароль</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="warn">Войти</button>
+  </form>
+</mat-card>

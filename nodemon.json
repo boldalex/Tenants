@@ -1,0 +1,10 @@
+{
+  "env": {
+    "DB_USER": "alex",
+    "DB_HOST": "localhost",
+    "DB_NAME": "tenants",
+    "DB_PWD": "alex",
+    "DB_PORT": 5432,
+    "JWT_KEY": "super_secret_key"
+  }
+}

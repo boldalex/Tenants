@@ -1,0 +1,22 @@
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let address of addresses" (click)="showFlats(address)">
+    <mat-expansion-panel-header>
+       {{ address.address_id + ' ' + address.street + ' ' + address.house }}
+    </mat-expansion-panel-header>
+    <!--<div class="post-image">
+      <img [src]="post.imagePath" [alt]="post.title">
+    </div> !-->
+    <mat-nav-list>
+      <a mat-list-item href="" *ngFor="let flat of address.flats">
+        Квартира №{{flat.flat_number + ' ' + flat.general_r}}
+        <app-star-rating [value]="flat.general_r" [readonly]="true"></app-star-rating>
+      </a>
+    </mat-nav-list>
+    <!-- <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
+      <a mat-button [routerLink]="['/edit', post.id]" color="accent">Edit</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
+    </mat-action-row> -->
+  </mat-expansion-panel>
+</mat-accordion>
+
+

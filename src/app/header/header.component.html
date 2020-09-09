@@ -1,0 +1,25 @@
+<mat-toolbar color="warn">
+  <span>
+    <a>Tenants</a>
+  </span>
+  <ul>
+    <li>
+      <a mat-button routerLink="/flats" routerLinkActive="mat-accent">Смотреть отзывы</a>
+    </li>
+    <li>
+      <a mat-button routerLink="/feedbacks/create" routerLinkActive="mat-accent">Создать новый отзыв</a>
+    </li>
+  </ul>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Вход</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Регистрация</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="onLogout()">Log out</button>
+    </li>
+  </ul>
+</mat-toolbar>
