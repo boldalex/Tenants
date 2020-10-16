@@ -1,0 +1,33 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [editable]="false">
+    <ng-template matStepLabel>Адрес</ng-template>
+    <div class="motivation">
+      <img src="assets/images/positive-vote.svg" alt="thumb up">
+      <p>Благодарим вас за то, что решили оставить отзыв об аренде квартиры. Делясь отзывами с другими
+        арендаторами, вы делаете процесс аренды более простым и прозрачнымю
+      </p>
+    </div>
+    <p>Выберите адрес квартиры из имеющейся базы или добавьте новый:</p>
+    <app-address-list [createMode]="true" (addressPush)="onAddressSelect($event)"></app-address-list>
+    <div class="add-address">
+      <button mat-raised-button matStepperNext class="add-address-button" aria-label="Add new address">
+        <mat-icon>add</mat-icon>
+        <span>Добавить новый адрес</span>
+      </button>
+    </div>
+  </mat-step>
+  <mat-step [editable]="false">
+    <ng-template matStepLabel>Квартира</ng-template>
+    <ng-container *ngIf="stepper.selectedIndex === 1">
+      <app-flat-create [address]="address" (flat)="onFlatSelect($event)">
+      </app-flat-create>
+    </ng-container>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Отзыв</ng-template>
+    <ng-container *ngIf="stepper.selectedIndex === 2">
+      <app-feedback-create [flat]="flatData">
+      </app-feedback-create>
+    </ng-container>
+  </mat-step>
+</mat-horizontal-stepper>

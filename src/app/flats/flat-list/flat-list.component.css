@@ -1,0 +1,50 @@
+agm-map {
+  height: 300px;
+}
+
+mat-spinner{
+  margin: auto;
+}
+
+mat-card-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#ratings{
+  width: 45%;
+}
+
+#map{
+  width:45%;
+}
+
+.rating-show{
+  justify-content: space-between;
+}
+
+.disabled-text{
+  color:grey;
+}
+
+.big-rating{
+  font-size: 200%;
+  font-weight: bold;
+}
+
+.small-rating{
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+app-star-rating{
+  font-size: 100%;
+}
+
+.rating-align{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+

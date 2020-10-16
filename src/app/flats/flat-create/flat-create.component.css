@@ -1,0 +1,24 @@
+button{
+  display: block;
+}
+
+mat-form-field{
+  display: block;
+}
+
+#map{
+  width: 40%;
+}
+
+.container{
+  display: flex;
+  justify-content: space-between;
+}
+
+form{
+  width: 55%;
+}
+
+agm-map{
+  height:300px;
+}

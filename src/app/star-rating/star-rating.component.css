@@ -5,3 +5,12 @@ mat-icon{
 .selected{
   color: gold;
 }
+
+.big-star{
+  font-size: large;
+}
+
+.giant-star{
+  font-size: 250%;
+  margin: 0 5px;
+}

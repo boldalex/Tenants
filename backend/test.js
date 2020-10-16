@@ -9,7 +9,8 @@ const request = require('request');
 //     console.log(body);
 // });
 
-// request.post('http://localhost:3000/api/flats/',{json:{ addressId: 10, flatNumber: 100}}, (err,res,body) => {
+// request.post('http://localhost:3000/api/flats/',{json:{ fullAddress: 'kek', longitude: 5, latitude: 10, flatNumber: 70}}
+// ,(err,res,body) => {
 //   if (err){
 //     console.log(err);
 //   }
@@ -42,7 +43,14 @@ const request = require('request');
 //   console.log(body);
 // });
 
-request.get('http://localhost:3000/api/flats/2', (err,res,body) => {
+// request.get('http://localhost:3000/api/flats/20', (err,res,body) => {
+//   if (err){
+//     console.log(err);
+//   }
+//   console.log(body);
+// });
+
+request.get('http://localhost:3000/api/flats/unit/21', (err,res,body) => {
   if (err){
     console.log(err);
   }

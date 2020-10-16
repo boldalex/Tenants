@@ -16,17 +16,27 @@ import { FlatListComponent } from './flats/flat-list/flat-list.component';
 import { FeedbackCreateComponent } from './feedbacks/feedback-create.component';
 import { RatingModule } from 'ng-starrating';
 import { StarRatingComponent } from './star-rating/star-rating.component';
+import { GeneralCreateComponent } from './general-create/general-create.component';
+import { FlatCreateComponent } from './flats/flat-create/flat-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
+import { AddressListComponent } from './flats/address-list/address-list.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     HeaderComponent,
     SignupComponent,
     LoginComponent,
     FlatListComponent,
     FeedbackCreateComponent,
     StarRatingComponent,
+    GeneralCreateComponent,
+    AddressListComponent,
+    FlatCreateComponent,
     ForbiddenValidatorDirective,
     InvalidInputDirective
   ],
@@ -37,7 +47,13 @@ import { StarRatingComponent } from './star-rating/star-rating.component';
     AngularMaterialModule,
     FormsModule,
     HttpClientModule,
-    RatingModule
+    RatingModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDrvPq7HcdMLESAcaFCqySfdeX9QQcDXAU',
+      libraries: ['places'],
+      language: 'RU'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

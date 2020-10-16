@@ -1,25 +1,38 @@
-<mat-toolbar color="warn">
-  <span>
-    <a>Tenants</a>
-  </span>
+<mat-toolbar>
   <ul>
     <li>
-      <a mat-button routerLink="/flats" routerLinkActive="mat-accent">Смотреть отзывы</a>
-    </li>
-    <li>
-      <a mat-button routerLink="/feedbacks/create" routerLinkActive="mat-accent">Создать новый отзыв</a>
+      <a href="/home" id="logo">
+        <img src="assets/images/home.svg" alt="home">
+        <span class="bold">Tenants.su</span>
+        - отзывы об аренде квартир в Москве
+      </a>
     </li>
   </ul>
   <span class="spacer"></span>
   <ul>
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/login" routerLinkActive="mat-accent">Вход</a>
+
+  </ul>
+</mat-toolbar>
+<div class="nav">
+  <ul class="nav-links">
+    <li class="nav-links-item-left">
+      <a mat-button routerLink="/home" routerLinkActive="active-link" class="nav-link-button">О проекте</a>
     </li>
-    <li *ngIf="!userIsAuthenticated">
-      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Регистрация</a>
+    <li class="nav-links-item-left">
+      <a mat-button routerLink="/flats" routerLinkActive="active-link" class="nav-link-button">Найти отзывы</a>
     </li>
-    <li *ngIf="userIsAuthenticated">
+    <li class="nav-links-item-left">
+      <a mat-button routerLink="/create" routerLinkActive="active-link" class="nav-link-button">Оставить отзыв</a>
+    </li>
+    <span class="spacer"></span>
+    <li *ngIf="!userIsAuthenticated" class="nav-links-item-right">
+      <a mat-button routerLink="/login" routerLinkActive="active-link" class="nav-link-button">Вход</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated" class="nav-links-item-right">
+      <a mat-button routerLink="/signup" routerLinkActive="active-link" class="nav-link-button">Регистрация</a>
+    </li>
+    <li *ngIf="userIsAuthenticated" class="nav-links-item-right">
       <button mat-button (click)="onLogout()">Log out</button>
     </li>
   </ul>
-</mat-toolbar>
+</div>

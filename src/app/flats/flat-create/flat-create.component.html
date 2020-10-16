@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-title>Информация о квартире</mat-card-title>
+  <div class="container">
+    <form [formGroup]="flatForm">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Адрес</mat-label>
+        <input matInput type="text" id="place" #search formControlName="fullAddress" autocomplete="off"
+        autocapitalize="off" spellcheck="off" placeholder="Введите адрес">
+        <mat-error *ngIf="flatForm.controls.fullAddress.invalid" required>Пожалуйста укажите адрес</mat-error>
+      </mat-form-field>
+
+      <!-- <p>{{address.city}}</p>
+      <p>{{address.street}}</p>
+      <p>{{address.house}}</p> -->
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Город</mat-label>
+        <input matInput formControlName="city" type="text">
+        <mat-error *ngIf="flatForm.controls.city.invalid" required>Пожалуйста укажите город</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Улица</mat-label>
+        <input matInput formControlName="street" type="text">
+        <mat-error *ngIf="flatForm.controls.street.invalid" required>Пожалуйста укажите улицу</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Дом</mat-label>
+        <input matInput formControlName="house" type="number">
+        <mat-error *ngIf="flatForm.controls.house.invalid" required>Пожалуйста укажите номер дома</mat-error>
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Квартира</mat-label>
+        <input matInput formControlName="flatNumber" type="number">
+        <mat-error *ngIf="flatForm.controls.flatNumber.invalid" required>Пожалуйста укажите номер квартиры</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button matStepperNext color="warn"
+      [disabled]="!flatForm.valid" type="button" (click)="onSubmit()">Перейти к отзыву</button>
+    </form>
+
+    <div id="map">
+      <agm-map [latitude]="defLatitude" [longitude]="defLongitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</mat-card>
+

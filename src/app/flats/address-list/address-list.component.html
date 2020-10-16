@@ -1,0 +1,27 @@
+<mat-accordion multi="true">
+  <mat-expansion-panel *ngFor="let address of addresses" (click)="showFlats(address)">
+    <mat-expansion-panel-header>
+       {{ address.fullAddress }}
+    </mat-expansion-panel-header>
+    <!--<div class="post-image">
+      <img [src]="post.imagePath" [alt]="post.title">
+    </div> !-->
+    <mat-nav-list *ngIf="!createMode">
+      <a mat-list-item [routerLink]="['/flat/feedbacks', flat.flat_id]" *ngFor="let flat of address.flats">
+        Квартира №{{flat.flat_number + ' ' + flat.general_r}}
+        <app-star-rating [value]="flat.general_r" [readonly]="true"></app-star-rating>
+      </a>
+    </mat-nav-list>
+    <button
+      *ngIf="createMode"
+      (click)="onNewFlat(address)"
+      mat-raised-button matStepperNext
+      color="accent"
+      aria-label="Add new flat">
+      <mat-icon>add</mat-icon>
+      <span>Добавить новую квартиру</span>
+    </button>
+  </mat-expansion-panel>
+</mat-accordion>
+
+

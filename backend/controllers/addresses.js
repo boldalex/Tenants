@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 
 const getAddresses = (req, res, next) => {
-  query = 'SELECT address_id, street, property_number, longitude, latitude from addresses';
+  query = 'SELECT address_id, full_address, longitude, latitude from addresses';
   pool.query(query,(error,results) => {
     if (error) {
       res.status(500).json({

@@ -8,6 +8,8 @@ router.post("", FlatsController.createFlat);
 
 router.get("", FlatsController.getFlats);
 
-router.get("/:addressId", FlatsController.getFlatsByAddress)
+router.get("/:addressId", FlatsController.getFlatsByAddress);
+
+router.get("/unit/:flatId", FlatsController.getUnit);
 
 module.exports = router;

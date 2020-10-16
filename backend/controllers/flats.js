@@ -32,34 +32,59 @@ const createFlat = (req, res, next) => {
           });
         });
     }else {
-      query = `INSERT INTO addresses (city,adm_area_id,district_id,street,property_type_id,property_number,longitude,latitude)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`;
-      parameters = [req.body.city,req.body.admAreaId,req.body.districtId,req.body.street,req.body.propertyTypeId,
-        req.body.propertyNumber,req.body.longitude,req.body.latitude];
-      return pool.query(query,parameters)
+      parameters = [req.body.fullAddress,req.body.longitude,req.body.latitude];
+      return pool.query(`INSERT INTO addresses (full_address,longitude,latitude)
+      VALUES ($1,$2,$3) RETURNING *`,parameters)
         .then((results) => {return results.rows[0].address_id})
         .catch((error) => {
           res.status(500).json({
-            message: error,
-            location: "secind request"
+            message: error
           });
         });
     }
   }
   checkId().then((validId) => {
-    pool.query(
-      "INSERT INTO flats (address_id,flat_number) VALUES ($1,$2)",
-      [validId, req.body.flatNumber],
-      (error, results) => {
-        if (error) {
+    if (validId){
+      let flatData = {
+        addressId: validId,
+        flatId: null
+      }
+      return pool.query(
+        "SELECT flat_id from flats WHERE address_id = $1 and flat_number = $2",
+        [validId, req.body.flatNumber])
+        .then((results) => {
+          if (results.rowCount > 0){
+            flatData.flatId = results.rows[0].flat_id
+          }
+            return flatData;
+        }).catch((error) => {
           res.status(500).json({
             message: error,
           });
-        }
-        res.status(201).json({ message: "Flat created" });
+        });
+    }
+  }).then((flat)=>{
+    if (flat){
+      if (flat.flatId == null) {
+        pool.query(
+          "INSERT INTO flats (address_id,flat_number) VALUES ($1,$2) RETURNING *",
+          [flat.addressId, req.body.flatNumber],
+          (error, results) => {
+            if (error) {
+              return res.status(500).json({
+                message: error,
+              });
+            }else{
+              res.status(201).json({ message: "Flat created", flatId: results.rows[0].flat_id });
+            }
+          }
+        );
+      }else{
+        res.status(200).json({message: "Flat already exists", flatId: flat.flatId});
       }
-    );
+    }
   });
+
 }
 
 const getFlats = (req, res, next) => {
@@ -130,7 +155,31 @@ const getFlatsByAddress = (req, res, next) => {
     }
     res.status(200).json({
       message: 'success',
-      flats: results.rows});
+       flats: results.rows});
+
+  });
+};
+
+const getUnit = (req, res, next) => {
+  text = `select a.address_id, a.full_address, a.longitude, a.latitude, fl.flat_id, fl.flat_number, r.general_r
+  from flats fl full join (
+  SELECT f.flat_id, avg(f.general_r) general_r from (
+  select flat_id, (neighborhood_r + flat_r + location_r + owner_r + infrastructure_r)::decimal/5 general_r
+  from feedbacks) as f
+  group by flat_id
+  ) as r on (fl.flat_id = r.flat_id)
+  full join addresses a on (fl.address_id = a.address_id)
+  where fl.flat_id = $1`;
+  pool.query(text,[req.params.flatId],(error,results) => {
+    if (error) {
+      res.status(500).json({
+        message: error,
+      });
+    }
+    res.status(200).json({
+      message: 'success',
+      unit: results.rows[0]});
+
   });
 };
 
@@ -138,4 +187,5 @@ module.exports = {
   createFlat,
   getFlats,
   getFlatsByAddress,
+  getUnit
 };

@@ -13,3 +13,8 @@ mat-form-field{
 mat-card{
   margin-bottom: 20px;
 }
+
+.star-error{
+  font-size: 70%;
+  color: red;
+}

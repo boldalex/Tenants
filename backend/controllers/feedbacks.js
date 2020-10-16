@@ -28,7 +28,7 @@ const createFeedback = (req,res,next) => {
 }
 
 const getFeedbacks = (req,res,next) => {
-  query = `SELECT u.username, f.feedback_date, neighborhood_r, neighborhood_c, flat_r, flat_c, location_r,
+  query = `SELECT f.user_id, u.username, f.feedback_date, neighborhood_r, neighborhood_c, flat_r, flat_c, location_r,
     location_c, owner_r, owner_c, infrastructure_r, infrastructure_c, general_c,
     (neighborhood_r + flat_r + location_r + owner_r + infrastructure_r)::decimal/5 general_r
     FROM feedbacks f JOIN users u ON (f.user_id = u.user_id)
@@ -39,7 +39,7 @@ const getFeedbacks = (req,res,next) => {
         message: error
       });
     }else{
-      res.status(200).json(results.rows);
+      res.status(200).json({message: 'success', feedbacks: results.rows});
     }
 
   })

@@ -1,0 +1,11 @@
+li, p{
+  font-size: 1.1em;
+}
+
+.bold{
+  font-weight: bold;
+}
+.block{
+  font-size: 1.2em;
+  display:block;
+}

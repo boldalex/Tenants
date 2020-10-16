@@ -1,22 +1,76 @@
-<mat-accordion multi="true">
-  <mat-expansion-panel *ngFor="let address of addresses" (click)="showFlats(address)">
-    <mat-expansion-panel-header>
-       {{ address.address_id + ' ' + address.street + ' ' + address.house }}
-    </mat-expansion-panel-header>
-    <!--<div class="post-image">
-      <img [src]="post.imagePath" [alt]="post.title">
-    </div> !-->
-    <mat-nav-list>
-      <a mat-list-item href="" *ngFor="let flat of address.flats">
-        Квартира №{{flat.flat_number + ' ' + flat.general_r}}
-        <app-star-rating [value]="flat.general_r" [readonly]="true"></app-star-rating>
-      </a>
-    </mat-nav-list>
-    <!-- <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
-      <a mat-button [routerLink]="['/edit', post.id]" color="accent">Edit</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">Delete</button>
-    </mat-action-row> -->
-  </mat-expansion-panel>
-</mat-accordion>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="!isLoading">
+  <mat-card >
+    <mat-card-header>
+      <mat-card-title>{{unit.address.fullAddress}}</mat-card-title>
+      <mat-card-subtitle>{{'Квартира № ' + unit.flat.flat_number}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div id="ratings">
+        <p class="rating-show rating-align">
+          <span class="big-rating">Общий рейтинг:</span>
+          <app-star-rating [value]="unit.flat.general_r" [readonly]="true" [starSize]="2"></app-star-rating>
+        </p>
+        <p class="rating-show rating-align small-rating">Рейтинг окружения:
+          <app-star-rating [value]="averageRatings.neighborhood" [readonly]="true"></app-star-rating>
+        </p>
+        <p class="rating-show rating-align small-rating">Рейтинг квартиры:
+          <app-star-rating [value]="averageRatings.flat" [readonly]="true"></app-star-rating>
+        </p>
+        <p class="rating-show rating-align small-rating">Рейтинг расположения:
+          <app-star-rating [value]="averageRatings.location" [readonly]="true"></app-star-rating>
+        </p>
+        <p class="rating-show rating-align small-rating">Рейтинг владельцы:
+          <app-star-rating [value]="averageRatings.owner" [readonly]="true"></app-star-rating>
+        </p>
+        <p class="rating-show rating-align small-rating">Рейтинг инфраструктуры:
+          <app-star-rating [value]="averageRatings.infrastructure" [readonly]="true"></app-star-rating>
+        </p>
+
+
+      </div>
+      <div id="map">
+        <agm-map [latitude]="unit.address.latitude" [longitude]="unit.address.longitude" [zoom]="15">
+          <agm-marker [latitude]="unit.address.latitude" [longitude]="unit.address.longitude"></agm-marker>
+        </agm-map>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <h1 id="divider">Отзывы<span class="disabled-text">({{unit.feedbacks.length}})</span>:</h1>
+  <mat-accordion multi="true">
+    <mat-expansion-panel *ngFor="let feedback of unit.feedbacks">
+      <mat-expansion-panel-header (click)="show()">
+        <mat-panel-title class="rating-align">{{truncateDecimals(feedback.general_r)}}
+          <app-star-rating [value]="feedback.general_r" [readonly]="true"></app-star-rating>
+          {{feedback.general_c}}
+        </mat-panel-title>
+        <mat-panel-description>{{feedback.userName + ' ' + feedback.feedbackDate.toString()}}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <p class="rating-align">Окружение:
+          <app-star-rating [value]="feedback.neighborhood_r" [readonly]="true"></app-star-rating>
+        </p>
+        <p>{{feedback.neighborhood_c}}</p>
+        <p class="rating-align">Квартира:
+          <app-star-rating [value]="feedback.flat_r" [readonly]="true"></app-star-rating>
+        </p>
+        <p>{{feedback.flat_c}}</p>
+        <p class="rating-align">Расположение:
+          <app-star-rating [value]="feedback.location_r" [readonly]="true"></app-star-rating>
+        </p>
+        <p>{{feedback.location_c}}</p>
+        <p class="rating-align">Владелец:
+          <app-star-rating [value]="feedback.owner_r" [readonly]="true"></app-star-rating>
+        </p>
+        <p>{{feedback.neighborhood_c}}</p>
+        <p class="rating-align">Инфраструктура:
+          <app-star-rating [value]="feedback.infrastructure_r" [readonly]="true"></app-star-rating>
+        </p>
+        <p>{{feedback.infrastructure_c}}</p>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
 
 

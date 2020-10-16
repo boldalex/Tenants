@@ -3,6 +3,7 @@
   (mouseleave)="onMouseLeave(star)"
   (click)="onClick(star)"
   *ngFor="let star of stars"
-  [ngClass] = "{'selected': (star <= hovered || star <= value)}"
+  [ngClass] = "{'selected': (star <= hovered || star <= value), 'big-star' : (starSize === 1),
+  'giant-star': (starSize === 2)}"
   fontSet="material-icons-round"
 >star</mat-icon>

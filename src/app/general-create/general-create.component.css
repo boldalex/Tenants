@@ -1,0 +1,28 @@
+.motivation{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  margin: 20px 0;
+}
+
+img{
+  width: 100px;
+  margin-right: 50px;
+}
+
+p{
+  font-size: 1.1em;
+}
+
+mat-step{
+  width: 100%;
+}
+
+.add-address{
+  margin:20px auto;
+}
+.add-address-button{
+  background-color: #6a1d7d;
+  color: white;
+}

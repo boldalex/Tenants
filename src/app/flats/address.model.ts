@@ -1,7 +1,6 @@
 export interface UnitAddress{
-  address_id: string,
-  street: string,
-  house: number,
+  addressId: string
+  fullAddress: string,
   flats?: [],
   longitude: number,
   latitude: number
